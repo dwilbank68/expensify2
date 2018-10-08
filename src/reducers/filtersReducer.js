@@ -17,7 +17,7 @@ export default (state = defaultState, action) => {
         case ('SET_START_DATE'):
             return {...state, startDate: action.startDate};
         case ('SET_END_DATE'):
-            return {...state, startDate: action.endDate};
+            return {...state, endDate: action.endDate};
         default:
             return state;
     }

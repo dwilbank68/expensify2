@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import moment from 'moment';
 import {SingleDatePicker} from 'react-dates';
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
+
 
 import {connect} from 'react-redux';
 
@@ -100,69 +99,4 @@ class ExpenseForm extends Component {
     }
 }
 
-// ExpenseForm.defaultProps = {};
-// ExpenseForm.propTypes = {
-//     name:        PropTypes.string.isRequired,
-//     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
-//     message:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
-//     comments:    PropTypes.arrayOf(React.PropTypes.object),
-//     date:        PropTypes.instanceOf(Date)
-// };
-//
-// PropTypes -> array, bool, func, number, object, string, symbol
-
-///////////////////////////// mapDispatchToProps //////////////////////////////
-//
-// Skip it - dispatch is on props anyway                            // 1
-//
-// function mapDispatchToProps(dispatch) {                          // 2
-//     return {
-//         loadCourses: () => {dispatch(loadCourses())},
-//         createCourse: (course) => {dispatch(createCourse(course))},
-//     };
-// }
-//
-// function mapDispatchToProps(dispatch) {                          // 3
-//     return bindActionCreators(
-//         { nameYouWantOnProps:nameOfImportedAction },
-//         dispatch
-//     );
-// }
-//
-// function mapDispatchToProps(dispatch) {
-//     return {
-//         actions: bindActionCreators(actions, dispatch)           // 4
-//     };
-// }
-//
-// const mapStateToProps = state => ({
-//     articles: state.articles
-// });
-
-///////////////////////////// context //////////////////////////////
-
-// ManageCoursePage.contextTypes = {
-//     router: React.PropTypes.object.isRequired
-// }
-// (lets you do 'this.context.router.push('/wherever');
-
 export default (ExpenseForm);
-// export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);
-// export default connect(mSTP, mDTP)(  someHOC(ExpenseForm, arg2)  );
-// export default connect(null, actions)(ExpenseForm);         // 5
-// export default connect(mapStateToProps, () => ({}))(ExpenseForm);
-// export default connect(mapStateToProps, { nameOfImportedAction })(ExpenseForm);
-
-// 1 -  to access --> this.props.dispatch(loadCourses());
-// 2 -  to access --> this.props.loadCourses, this.props.createCourse
-// 3 -  use bindActionCreators (which is just a shortcut method)
-// 4 -  to access --> this.props.actions.loadCourses();
-// 5 -  if you "import * as actions from '../actions/actionsIndex';"
-
-
-// remember to use 'this' binding now (choose one, #1 is best)
-// 1. In constructor (see constructor above)
-// 2. .bind(this) in your render ( onClick={this.onClick.bind(this)} )
-// 3. Arrow functions in your render ( onClick={() => {}} )
-// 4. _.bindAll(this,'methodName','...')
-// 5. see ALTERNATIVE 2 above - no 'this' binding required

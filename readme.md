@@ -2,6 +2,12 @@
 
     npm run dev-server
 
+### Run jest in watch mode
+
+    npm test -- --watch
+    
+    // extra hyphens associate 'watch' with 'test' instead of with 'npm'
+
 ### return index.html to be handled by react-router-dom instead of server returning 404
 
     //webpack.config.js will return index.html when request path is 404

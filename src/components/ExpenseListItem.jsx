@@ -3,7 +3,8 @@ import {Link} from 'react-router-dom';
 import moment from 'moment';
 
 // const ExpenseListItem = (props) => {
-const ExpenseListItem = ({description, amount, createdAt, id}) => {
+export const
+ExpenseListItem = ({description, amount, createdAt, id}) => {
 
     return (
         <div className="expense-list-item">

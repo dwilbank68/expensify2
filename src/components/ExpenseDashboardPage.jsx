@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import ExpenseList from './ExpenseList.jsx';
 import ExpenseListFilters from './ExpenseListFilters.jsx';
 
-class EditExpense extends Component {
+class ExpenseDashboardPage extends Component {
 
     // constructor(props, context){
     //     super(props, context);
@@ -48,8 +48,8 @@ class EditExpense extends Component {
     }
 }
 
-// EditExpense.defaultProps = {};
-// EditExpense.propTypes = {
+// ExpenseDashboardPage.defaultProps = {};
+// ExpenseDashboardPage.propTypes = {
 //     name:        PropTypes.string.isRequired,
 //     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
 //     message:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
@@ -59,12 +59,12 @@ class EditExpense extends Component {
 //
 // PropTypes -> array, bool, func, number, object, string, symbol
 
-// EditExpense.contextTypes = {
+// ExpenseDashboardPage.contextTypes = {
 //     router: React.PropTypes.object.isRequired
 // }
 // (lets you do 'this.context.router.push('/wherever');
 
-export default EditExpense;
+export default ExpenseDashboardPage;
 
 // remember to use 'this' binding now (choose one, #1 is best)
 // 1. In constructor (see constructor above)

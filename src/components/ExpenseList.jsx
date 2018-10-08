@@ -5,15 +5,19 @@ import {connect} from 'react-redux';
 import ExpenseListItem from './ExpenseListItem.jsx';
 import selectExpenses from '../selectors/expenses.js';
 // const ExpenseList = (props) => {
-const ExpenseList = ({expenses, filters}) => {
+export const
+ExpenseList = ({expenses, filters}) => {
 
     return (
         <div className="expense-list">
-            <h1>Expense List</h1>
-            {expenses.map(exp => (
-                 <ExpenseListItem   {...exp}
-                                    key={exp.id}/>
-            ))}
+            {expenses.length === 0 ? (
+                <p>no expenses</p>
+            ) : (
+                expenses.map(exp => (
+                    <ExpenseListItem   {...exp}
+                                       key={exp.id}/>
+                ))
+            )}
         </div>
     );
 };

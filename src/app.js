@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 
 import AppRouter from './routers/AppRouter.jsx';
 import configureStore from './store/configureStore';
+import 'react-dates/initialize';
 
 import {addExpenseActionGen} from "./actions/expensesActionGenerators";
 import {setTextFilter} from "./actions/filtersActionGenerators";
@@ -11,6 +12,7 @@ import getVisibleExpenses from './selectors/expenses.js';
 
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
+import 'react-dates/lib/css/_datepicker.css';
 
 const store = configureStore();
 
