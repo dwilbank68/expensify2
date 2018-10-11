@@ -38,7 +38,7 @@ module.exports = (env, argv) => {
         devtool: isProduction ? 'source-map' : 'inline-source-map', // 2
         devServer: {
             contentBase: path.join(__dirname, 'public'),
-            historyApiFallback: true
+            historyApiFallback: true                                // 3
         }
     };
 };
@@ -46,3 +46,5 @@ module.exports = (env, argv) => {
 // 1 -  argument is the name of the file you want to be created during build
 // 2 -  in production, bundle.js.map will be created, and only loaded if user
 //      opens up their Dev Tools
+// 3 -  For development, serves /public/index.html every time 404
+//      For production, do the same thing in server.js with app.get('*'...

@@ -1,2 +1,6 @@
-/rarefilm.txt
 /node_modules/
+/public/bundle.js
+/public/styles.css
+/public/bundle.js.map
+/public/styles.css.map
+.idea/workspace.xml
