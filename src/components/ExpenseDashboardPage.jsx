@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 
 import ExpenseList from './ExpenseList.jsx';
 import ExpenseListFilters from './ExpenseListFilters.jsx';
+import ExpenseSummary from './ExpenseSummary.jsx';
 
 class ExpenseDashboardPage extends Component {
 
@@ -41,6 +42,7 @@ class ExpenseDashboardPage extends Component {
     render() {
         return (
             <header className="header">
+                <ExpenseSummary/>
                 <ExpenseListFilters/>
                 <ExpenseList/>
             </header>
