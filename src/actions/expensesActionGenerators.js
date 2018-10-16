@@ -8,16 +8,15 @@ export const addExpenseActionGen =
 });
 
 export const startAddExpenseActionGen =
-(expenseData = {}) => {
-    return (dispatch, getState) => {
-        const {description = '', note = '', amount = 0, createdAt = 0} = expenseData;
-        const expense = {description, note, amount, createdAt};
-        return database
-            .ref('expenses')
-            .push(expense)
-            .then(ref => dispatch(addExpenseActionGen({id: ref.key, ...expense})))
-    }
+(expenseData = {}) => (dispatch, getState) => {
+    const {description = '', note = '', amount = 0, createdAt = 0} = expenseData;
+    const expense = {description, note, amount, createdAt};
+    return database
+        .ref('expenses')
+        .push(expense)
+        .then(ref => dispatch(addExpenseActionGen({id: ref.key, ...expense})))
 }
+
 
 
 
@@ -36,14 +35,12 @@ export const editExpenseActionGen =
 
 
 
+export const setExpensesActionGen =
+(expenses) => ({
+    type: 'SET_EXPENSES',
+    expenses
+});
+
+// export const startSetExpenses =
 
 
-
-
-
-// or
-
-// export const startAddExpense =
-// ({whatever}) => (dispatch, getState) => {
-//
-// }

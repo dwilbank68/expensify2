@@ -3,13 +3,24 @@ import thunk from 'redux-thunk';
 import database from '../firebase/firebase.js';
 
 import {
-    addExpenseActionGen, editExpenseActionGen, removeExpenseActionGen,
+    addExpenseActionGen, editExpenseActionGen, removeExpenseActionGen, setExpensesActionGen,
     startAddExpenseActionGen
 } from "./expensesActionGenerators";
 
 import expenses from '../testing/fixtures/expenses.js';
 
 const createMockStore = configureMockStore([thunk]);                        // 0
+
+beforeEach( done => {
+    const expensesData = {}
+    expenses.forEach(({id, description, note, amount, createdAt}) => {
+        expensesData[id] = {description, note, amount, createdAt}
+    });
+    database
+        .ref('expenses')
+        .set(expensesData)
+        .then(() => done());
+});
 
 test('should return REMOVE_EXPENSE action obj', () => {
     const action = removeExpenseActionGen({id:'123abc'});
@@ -80,17 +91,13 @@ test('should add expense with defaults to database and store', () => {
         });
 })
 
-
-
-// test('should return ADD_EXPENSE action obj - default values', () => {
-//     const action = addExpenseActionGen();
-//     expect(action).toEqual({
-//         type: 'ADD_EXPENSE',
-//         expense: {
-//             note: '', description: '', amount: 0, createdAt: 0,
-//             id: expect.any(String)
-//         }
-//     })
-// })
-
-// 0 -  pass in array of middleware to use
+test('should return SET_EXPENSES action obj', () => {
+    const action = setExpensesActionGen(expenses);
+    console.log('------------------------------------------');
+    console.log('action ',action);
+    console.log('------------------------------------------');
+    expect(action).toEqual({
+        type: 'SET_EXPENSES',
+        expenses
+    });
+});
