@@ -41,6 +41,24 @@ export const setExpensesActionGen =
     expenses
 });
 
-// export const startSetExpenses =
+export const startSetExpensesActionGen =
+() => {
+    return (dispatch, getState) => {
+        return database
+            .ref('expenses')
+            .once('value')
+            .then(snapshot => {
+                const expensesArr = [];
+                snapshot.forEach(s => {
+                    expensesArr.push({
+                        id: s.key, ...s.val()
+                    })
+                })
+                dispatch(setExpensesActionGen(expensesArr))
+            })
+    }
+}
+
+
 
 

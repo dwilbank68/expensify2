@@ -4,7 +4,7 @@ import database from '../firebase/firebase.js';
 
 import {
     addExpenseActionGen, editExpenseActionGen, removeExpenseActionGen, setExpensesActionGen,
-    startAddExpenseActionGen
+    startAddExpenseActionGen, startSetExpensesActionGen
 } from "./expensesActionGenerators";
 
 import expenses from '../testing/fixtures/expenses.js';
@@ -12,6 +12,7 @@ import expenses from '../testing/fixtures/expenses.js';
 const createMockStore = configureMockStore([thunk]);                        // 0
 
 beforeEach( done => {
+    jest.setTimeout(10000);
     const expensesData = {}
     expenses.forEach(({id, description, note, amount, createdAt}) => {
         expensesData[id] = {description, note, amount, createdAt}
@@ -69,7 +70,8 @@ test('should add expense to database and store', (done) => {
 });
 
 
-test('should add expense with defaults to database and store', () => {
+
+test('should add expense with defaults to database and store', (done) => {
     const mockStore = createMockStore();
     const defaultExpense = {description:'', amount:0, note:'', createdAt: 0}
 
@@ -93,11 +95,22 @@ test('should add expense with defaults to database and store', () => {
 
 test('should return SET_EXPENSES action obj', () => {
     const action = setExpensesActionGen(expenses);
-    console.log('------------------------------------------');
-    console.log('action ',action);
-    console.log('------------------------------------------');
     expect(action).toEqual({
         type: 'SET_EXPENSES',
         expenses
     });
+});
+
+test('should fetch expenses from firebase', (done) => {
+    const store = createMockStore({});
+    store
+        .dispatch(startSetExpensesActionGen())
+        .then(() => {
+            const actions = store.getActions();
+            expect(actions[0]).toEqual({
+                type: 'SET_EXPENSES',
+                expenses
+            });
+            done();
+        });
 });

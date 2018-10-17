@@ -13,6 +13,7 @@ import 'react-dates/lib/css/_datepicker.css';
 const store = configureStore();
 
 // import {addExpenseActionGen} from './actions/expensesActionGenerators';
+import {startSetExpensesActionGen} from './actions/expensesActionGenerators';
 //
 // store.dispatch(addExpenseActionGen({description: '20th', amount: 4500, createdAt: 1537492054974}));
 // store.dispatch(addExpenseActionGen({description: '18th', amount: 66666, createdAt: 1537297200000}));
@@ -26,4 +27,9 @@ const jsx = (
     </Provider>
 )
 
-ReactDOM.render(jsx, document.getElementById('app'));
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+store
+    .dispatch(startSetExpensesActionGen())
+    .then(() => {
+        ReactDOM.render(jsx, document.getElementById('app'));
+    })

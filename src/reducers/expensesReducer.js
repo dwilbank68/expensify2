@@ -11,6 +11,8 @@ export default
                 if (exp.id === action.id) return { ...exp, ...action.updates };
                 return exp;
             });
+        case ('SET_EXPENSES'):
+            return action.expenses;
         default: return state;
 
     }
