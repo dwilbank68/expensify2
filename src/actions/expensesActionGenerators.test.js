@@ -4,7 +4,7 @@ import database from '../firebase/firebase.js';
 
 import {
     addExpenseActionGen, editExpenseActionGen, removeExpenseActionGen, setExpensesActionGen,
-    startAddExpenseActionGen, startSetExpensesActionGen
+    startAddExpenseActionGen, startEditExpenseActionGen, startRemoveExpenseActionGen, startSetExpensesActionGen
 } from "./expensesActionGenerators";
 
 import expenses from '../testing/fixtures/expenses.js';
@@ -31,6 +31,29 @@ test('should return REMOVE_EXPENSE action obj', () => {
     })
 })
 
+test('should remove expense from firebase', (done) => {
+    const mockStore = createMockStore();
+    const id = expenses[2].id;
+    mockStore
+        .dispatch( startRemoveExpenseActionGen({id}) )
+        .then(() => {
+            const actions = mockStore.getActions();
+            expect(actions[0]).toEqual({
+                type:'REMOVE_EXPENSE',
+                id
+            })
+            return database
+                .ref(`expenses/${id}`)
+                .once('value');
+        })
+        .then(snapshot => {
+            expect(snapshot.val()).toBeFalsy();
+            done();
+        });
+});
+
+
+
 test('should return EDIT_EXPENSE action obj', () => {
     const action = editExpenseActionGen('123abc', {note:'New note value'});
     expect(action).toEqual({
@@ -39,6 +62,32 @@ test('should return EDIT_EXPENSE action obj', () => {
         updates: {note:'New note value'}
     })
 })
+
+test('should edit expenses from firebase', (done) => {
+    const mockStore = createMockStore();
+    const id = expenses[2].id;
+    const updates = { amount: 2};
+    mockStore
+        .dispatch( startEditExpenseActionGen(id, updates) )
+        .then(() => {
+            const actions = mockStore.getActions();
+            expect(actions[0]).toEqual({
+                type:'EDIT_EXPENSE',
+                id,
+                updates
+            })
+            return database
+                .ref(`expenses/${id}`)
+                .once('value');
+        })
+        .then(snapshot => {
+            expect(snapshot.val().amount).toEqual(updates.amount);
+            done();
+        });
+})
+
+
+
 
 test('should return ADD_EXPENSE action obj - provided values', () => {
     const action = addExpenseActionGen(expenses[2]);
@@ -69,8 +118,6 @@ test('should add expense to database and store', (done) => {
         });
 });
 
-
-
 test('should add expense with defaults to database and store', (done) => {
     const mockStore = createMockStore();
     const defaultExpense = {description:'', amount:0, note:'', createdAt: 0}
@@ -92,6 +139,8 @@ test('should add expense with defaults to database and store', (done) => {
             done();
         });
 })
+
+
 
 test('should return SET_EXPENSES action obj', () => {
     const action = setExpensesActionGen(expenses);

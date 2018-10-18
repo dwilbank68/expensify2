@@ -26,12 +26,49 @@ export const removeExpenseActionGen =
     id
 });
 
+export const startRemoveExpenseActionGen =
+({id}) => (
+    (dispatch, getState) => {
+        return database
+            .ref(`expenses/${id}`)
+            .remove()
+            .then(() => dispatch(removeExpenseActionGen({id})))
+    }
+)
+
+// or
+
+// export const startRemoveExpenseActionGen =
+// ({whatever}) => (dispatch, getState) => {
+//
+// }
+
+
+
 export const editExpenseActionGen =
 (id, updates) => ({
     type: 'EDIT_EXPENSE',
     id,
     updates
 });
+
+export const startEditExpenseActionGen =
+(id, updates) => {
+    return (dispatch, getState) => {
+        return database
+            .ref(`expenses/${id}`)
+            .update(updates)
+            .then(() => dispatch(editExpenseActionGen(id, updates)))
+    }
+}
+
+// or
+
+// export const startEditExpenseActionGen =
+// ({whatever}) => (dispatch, getState) => {
+//
+// }
+
 
 
 
