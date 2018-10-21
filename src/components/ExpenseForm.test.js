@@ -5,8 +5,6 @@ import moment from 'moment';
 import ExpenseForm from './ExpenseForm.jsx';
 import expenses from '../testing/fixtures/expenses.js';
 
-import '../setupTests.js';
-
 test('should render ExpenseForm', () => {
     const wrapper = shallow(<ExpenseForm/>);
     expect(wrapper).toMatchSnapshot();

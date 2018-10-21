@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render LoginPage 1`] = `
+<div
+  className="log-in boxed-view"
+>
+  <div
+    className="boxed-view__box"
+    style={
+      Object {
+        "background": "rgba(255,255,255,.9)",
+        "borderRadius": "15px",
+      }
+    }
+  >
+    <h1>
+      Login
+    </h1>
+    <button
+      onClick={[MockFunction]}
+    >
+      Login with Google
+    </button>
+    <form
+      className="boxed-view__form"
+      noValidate={true}
+      onSubmit={[Function]}
+    >
+      <input
+        onChange={[Function]}
+        placeholder="Email"
+        type="email"
+        value=""
+      />
+      <input
+        onChange={[Function]}
+        placeholder="Password"
+        type="password"
+        value=""
+      />
+      <button
+        className="button"
+      >
+        Log In
+      </button>
+    </form>
+    <Link
+      replace={false}
+      to="/signup"
+    >
+      Need an account?
+    </Link>
+  </div>
+</div>
+`;

@@ -4,8 +4,6 @@ import {shallow} from 'enzyme';
 import {ExpenseSummary} from './ExpenseSummary.jsx';
 import expenses from '../testing/fixtures/expenses.js';
 
-import '../setupTests.js';
-
 test('should render ExpenseSummary with expenses', () => {
     const wrapper = shallow(<ExpenseSummary expensesCount={2}
                                             expensesTotal={'$664.35'}/>);

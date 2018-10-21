@@ -1,18 +1,17 @@
-import uuid from 'uuid';
 import database from '../firebase/firebase.js';
 
+export const addExpenseActionGen = (expense) => {
+    return {
+        type: 'ADD_EXPENSE', expense
+    }
+};
 
-export const addExpenseActionGen =
-(expense) => ({
-    type: 'ADD_EXPENSE', expense
-});
-
-export const startAddExpenseActionGen =
-(expenseData = {}) => (dispatch, getState) => {
+export const startAddExpenseActionGen = (expenseData = {}) => (dispatch, getState) => {
     const {description = '', note = '', amount = 0, createdAt = 0} = expenseData;
     const expense = {description, note, amount, createdAt};
+    const uid = getState().auth.uid;
     return database
-        .ref('expenses')
+        .ref(`users/${uid}/expenses`)
         .push(expense)
         .then(ref => dispatch(addExpenseActionGen({id: ref.key, ...expense})))
 }
@@ -20,69 +19,59 @@ export const startAddExpenseActionGen =
 
 
 
-export const removeExpenseActionGen =
-({id} = {}) => ({
-    type: 'REMOVE_EXPENSE',
-    id
-});
+export const removeExpenseActionGen = ({id} = {}) => {
+    return {
+        type: 'REMOVE_EXPENSE',
+        id
+    }
+};
 
-export const startRemoveExpenseActionGen =
-({id}) => (
-    (dispatch, getState) => {
+export const startRemoveExpenseActionGen = ({id}) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
         return database
-            .ref(`expenses/${id}`)
+            .ref(`users/${uid}/expenses/${id}`)
             .remove()
             .then(() => dispatch(removeExpenseActionGen({id})))
     }
-)
-
-// or
-
-// export const startRemoveExpenseActionGen =
-// ({whatever}) => (dispatch, getState) => {
-//
-// }
+}
 
 
 
-export const editExpenseActionGen =
-(id, updates) => ({
-    type: 'EDIT_EXPENSE',
-    id,
-    updates
-});
 
-export const startEditExpenseActionGen =
-(id, updates) => {
+export const editExpenseActionGen = (id, updates) => {
+    return {
+        type: 'EDIT_EXPENSE',
+        id,
+        updates
+    }
+};
+
+export const startEditExpenseActionGen = (id, updates) => {
     return (dispatch, getState) => {
+        const uid = getState().auth.uid;
         return database
-            .ref(`expenses/${id}`)
+            .ref(`users/${uid}/expenses/${id}`)
             .update(updates)
             .then(() => dispatch(editExpenseActionGen(id, updates)))
     }
 }
 
-// or
-
-// export const startEditExpenseActionGen =
-// ({whatever}) => (dispatch, getState) => {
-//
-// }
 
 
 
+export const setExpensesActionGen = (expenses) => {
+    return {
+        type: 'SET_EXPENSES',
+        expenses
+    }
+};
 
-export const setExpensesActionGen =
-(expenses) => ({
-    type: 'SET_EXPENSES',
-    expenses
-});
-
-export const startSetExpensesActionGen =
-() => {
+export const startSetExpensesActionGen = () => {
     return (dispatch, getState) => {
+        const uid = getState().auth.uid;
         return database
-            .ref('expenses')
+            .ref(`users/${uid}/expenses`)
             .once('value')
             .then(snapshot => {
                 const expensesArr = [];

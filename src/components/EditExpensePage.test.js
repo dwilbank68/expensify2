@@ -4,8 +4,6 @@ import {shallow} from 'enzyme';
 import {EditExpensePage} from './EditExpensePage.jsx';
 import expenses from '../testing/fixtures/expenses.js';
 
-import '../setupTests.js';
-
 let startEditExpense, startRemoveExpense, history, wrapper;
 
 beforeEach(() => {

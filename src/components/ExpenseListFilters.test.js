@@ -5,8 +5,6 @@ import {shallow} from 'enzyme';
 import {ExpenseListFilters} from './ExpenseListFilters.jsx';
 import {filters, altFilters} from '../testing/fixtures/filters.js';
 
-import '../setupTests.js';
-
 let setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate, wrapper;
 
 beforeEach(() => {

@@ -27,6 +27,9 @@ module.exports = (env, argv) => {
                 test: /\.js|jsx$/,
                 exclude: /node_modules/
             }, {
+                test: /\.(png|jpg|svg)$/,
+                loader: 'url-loader?limit=20000'
+            }, {
                 test: /\.s?css$/,
                 // use: ['style-loader', 'css-loader', 'sass-loader']
                 use: CSSExtract.extract({
