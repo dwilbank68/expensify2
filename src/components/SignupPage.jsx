@@ -29,7 +29,8 @@ const styles = {
     }
 }
 
-class SignUp extends Component {
+export
+class SignupPage extends Component {
 
     constructor(props, context){
         super(props, context);
@@ -101,8 +102,6 @@ class SignUp extends Component {
                         {this.state.error ? <p>{this.state.error}</p> : undefined}
 
                         <form onSubmit ={this.onSubmit} noValidate className="boxed-view__form">
-                            {/*<input type="text"      ref="screenName"      name="screenName"     placeholder="Screen Name (Short)"/>*/}
-                            {/*<input type="text"      ref="fullName"        name="fullName"       placeholder="Full Name (optional)"/>*/}
                             <input type="email"
                                    value={this.state.email}
                                    onChange={this.onEmailChange}
@@ -111,13 +110,7 @@ class SignUp extends Component {
                                    value={this.state.password}
                                    onChange={this.onPasswordChange}
                                    placeholder="Password"/>
-                            {/*<Select className="address"*/}
-                                    {/*clearable={false}*/}
-                                    {/*placeholder="Select Your Address"*/}
-                                    {/*options={options}*/}
-                                    {/*onChange={ val => this.onAddressChange(val) }/>*/}
-                            {/*<p>{this.state.address ? this.state.address : 'for residents only (address is required)'}</p>*/}
-                            <button className="button">Create Account</button>
+                           <button className="button">Create Account</button>
                         </form>
 
                         <Link to="/">
@@ -134,4 +127,4 @@ const mapDispatchToProps = dispatch => ({
     startEmailSignup: (email, password) => dispatch(startEmailSignup(email, password))
 })
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(null, mapDispatchToProps)(SignupPage);
