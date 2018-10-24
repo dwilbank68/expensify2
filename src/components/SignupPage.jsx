@@ -89,7 +89,7 @@ class SignupPage extends Component {
                 <div style={styles.boxedViewWrapper}>
                     <div style={styles.leftBox}>
                         <img    style={styles.logo}
-                                src="/public/filler.jpg" alt=""/>
+                                src="/dist/filler.svg" alt=""/>
                         <div>
                             <p></p>
                             <p></p>

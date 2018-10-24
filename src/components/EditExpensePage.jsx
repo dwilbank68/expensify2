@@ -44,11 +44,3 @@ const mapDispatchToProps = (dispatch, getState) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditExpensePage);
-
-// remember to use 'this' binding now (choose one, #1 is best)
-// 1. In constructor (see constructor above)
-// 2. .bind(this) in your render ( onClick={this.onClick.bind(this)} )
-// 3. Arrow functions in your render ( onClick={() => {}} )
-// 4. _.bindAll(this,'methodName','...')
-
-// }

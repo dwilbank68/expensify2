@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Route, Redirect} from 'react-router-dom';
 import Header from '../components/Header.jsx';
 
-const PrivateRoute = ({isAuthenticated, component: Component, ...rest}) => {
+const PrivateRoute = ({hasAddress, isAuthenticated, component: Component, uid, ...rest}) => {
 
     const PrivateComponent = props => (
         <div>
@@ -13,9 +13,10 @@ const PrivateRoute = ({isAuthenticated, component: Component, ...rest}) => {
     )
 
     return (
-        <Route {...rest} component={props => (
-            isAuthenticated ? PrivateComponent(props) : <Redirect to="/"/>
-        )}/>
+        <Route component={props => (
+                   isAuthenticated ? PrivateComponent(props) : <Redirect to="/"/>
+               )}
+               {...rest}/>
     );
 }
 

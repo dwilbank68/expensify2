@@ -1,5 +1,7 @@
 import {firebase, GoogleAuthProvider, EmailAuthProvider} from '../firebase/firebase.js';
 
+
+
 export const loginActionGen = (uid) => ({
     type: 'LOGIN', uid
 });
@@ -28,24 +30,8 @@ export const startEmailSignup = (email, password) => {
             .auth()
             .createUserWithEmailAndPassword(email, password)
             .then(data => {
-                let user = firebase.auth().currentUser;
-
-                user.updateProfile({
-                    address: "Whatever",
-                    role: "regular joe"
-                }).then(function(res) {
-                    console.log('------------------------------------------');
-                    console.log('user after updateProfile',user);
-                    console.log('------------------------------------------');
-                    // Update successful.
-                }).catch(function(error) {
-                    console.log('------------------------------------------');
-                    console.log('error in updateProfile',error);
-                    console.log('------------------------------------------');
-                    // An error happened.
-                });
                 console.log('------------------------------------------');
-                console.log('data ',JSON.stringify(data , null, 2));
+                console.log('success with createUserWithEmail And Password');
                 console.log('------------------------------------------');
             })
             .catch(e => {
