@@ -1,0 +1,48 @@
+.box-layout {
+    background: url('/images/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    width: 100vw;
+}
+
+.box-layout__box {
+  background: fade-out(white, .15);
+  border-radius: 3px;
+  text-align: center;
+  padding: $l-size $m-size;
+  width: 25rem;
+}
+
+.box-layout__form {
+    display: flex;
+    flex-direction: column;
+}
+
+//.boxed-view--modal {
+//    background: fade-out($boxed-view-overlay-bg, .3);
+//    position: fixed;
+//    top: 0;
+//    left: 0;
+//    right: 0;
+//    bottom: 0;
+//}
+
+.box-layout__title {
+  margin: 0 0 $m-size 0;
+  line-height: 1;
+}
+
+.Select-placeholder {
+    &:active {
+      outline: none;
+    }
+    &:focus {
+      outline: none;
+    }
+}

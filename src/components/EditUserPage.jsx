@@ -1,11 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
 import Select from 'react-select';
 
+import {startSetUserActionGen} from '../actions/userActionGenerators';
+
 import {data} from '../../addresses.js';
-//
-import {startEmailSignup} from '../actions/authActionGenerators.js';
 
 const styles = {
     boxedViewWrapper: {
@@ -28,59 +27,46 @@ const styles = {
     }
 }
 
-export
-class SignupPage extends Component {
+class EditUserPage extends Component {
 
     state = {
         address: '',
-        error: '',
-        email:'', password:'',
-        fullName:'', screenName:''
+        error:'',
+        fullName: '',
+        screenName: ''
     }
 
     onAddressChange = (val) => {
         this.setState({address:val.value})
     }
+
     onFullNameChange = e => {
         const fullName = e.target.value;
         this.setState({fullName})
     }
+
     onScreenNameChange = e => {
         const screenName = e.target.value;
         this.setState({screenName})
     }
-    onEmailChange = e => {
-        const email = e.target.value;
-        this.setState(() => ({email}));
-    }
-    onPasswordChange = e => {
-        const password = e.target.value;
-        this.setState(() => ({password}));
-    }
 
-    onSubmit = (e) => {
+    onSubmit = e => {
         e.preventDefault();
-        const {email, password, address, fullName, screenName} = this.state;
-        const userData = {address, fullName, screenName};
-        if (password.length < 8) {
-            this.setState({error:'Password must be at least 8 chars long'});
-            return;
-        }
-
-        if (!email || !password || !screenName) {
-            this.setState( () => ({error: 'please provide email, password, and screen name'}));
+        const {address, screenName, fullName} = this.state
+        const userData = {address, screenName, fullName};
+        const {id} = this.props.match.params;
+        if (!userData.address || !userData.screenName) {
+            this.setState( () => ({error: 'please provide address and screen name'}));
         } else {
             this.setState( () => ({error: ''}));
-            this.props.startEmailSignup( email, password, userData )
+            this.props.startSetUser(userData);
+            this.props.history.push('/')
         }
     }
-
-// <div className="log-in boxed-view">
-    // <div className="boxed-view__box">
 
     render() {
 
-        const options = data.addresses.map((a) => {
+        const options = data.addresses.map( a => {
             return {value:a, label:a}
         })
 
@@ -97,23 +83,15 @@ class SignupPage extends Component {
                     </div>
                     <div    className="boxed-view__box"
                             style={styles.rightBox}>
-                        <h1>Join</h1>
-
                         {this.state.error ? <p>{this.state.error}</p> : undefined}
 
-                        <form onSubmit ={this.onSubmit} noValidate className="boxed-view__form">
-                            <input type="email"
-                                   value={this.state.email}
-                                   onChange={this.onEmailChange}
-                                   placeholder="Email"/>
-                            <input type="password"
-                                   value={this.state.password}
-                                   onChange={this.onPasswordChange}
-                                   placeholder="Password"/>
+                        <form onSubmit ={this.onSubmit}
+                              noValidate
+                              className="boxed-view__form">
                             <input type="text"
                                    value={this.state.screenName}
                                    onChange={this.onScreenNameChange}
-                                   placeholder="screen-name or nickname"/>
+                                   placeholder="Screen Name (Short)"/>
                             <input type="text"
                                    value={this.state.fullName}
                                    onChange={this.onFullNameChange}
@@ -124,12 +102,8 @@ class SignupPage extends Component {
                                     options={options}
                                     onChange={ val => this.onAddressChange(val) }/>
                             <p>{this.state.address ? this.state.address : 'for residents only (address is required)'}</p>
-                            <button className="button">Create Account</button>
+                            <button className="button">Submit</button>
                         </form>
-
-                        <Link to="/">
-                            Already have an account?
-                        </Link>
                     </div>
                 </div>
             </div>
@@ -137,8 +111,31 @@ class SignupPage extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    startEmailSignup: (email, password, userData) => dispatch(startEmailSignup(email, password, userData))
-})
+///////////////////////////// mapDispatchToProps //////////////////////////////
+//
+// Skip it - dispatch is on props anyway                            // 1
+//
+function mapDispatchToProps(dispatch) {                          // 2
+    return {
+        startSetUser: (userData) => {dispatch(startSetUserActionGen(userData))}
+    };
+}
+//
+// function mapDispatchToProps(dispatch) {                          // 3
+//     return bindActionCreators(
+//         { nameYouWantOnProps:nameOfImportedAction },
+//         dispatch
+//     );
+// }
+//
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         actions: bindActionCreators(actions, dispatch)           // 4
+//     };
+// }
+//
+// const mapStateToProps = (state, props) => ({
+//     articles: state.articles
+// });
 
-export default connect(null, mapDispatchToProps)(SignupPage);
+export default connect(null, mapDispatchToProps)(EditUserPage);

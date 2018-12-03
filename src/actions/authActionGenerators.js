@@ -1,4 +1,6 @@
 import {firebase, GoogleAuthProvider, EmailAuthProvider} from '../firebase/firebase.js';
+import {setUserActionGen, startSetUserActionGen} from "./userActionGenerators";
+import database from "../firebase/firebase";
 
 
 
@@ -24,39 +26,44 @@ export const logoutActionGen = () => ({
 //     })
 // })
 
-export const startEmailSignup = (email, password) => {
+// pass in userDataObj, dispatch startSetUserActionGen with the userDataObj
+
+export const startEmailSignup = (email, password, userData) => {
+    console.log('------------------------------------------');
+    console.log('startEmailSignup, userData ', userData);
+    console.log('------------------------------------------');
     return (dispatch, getState) => {
         return firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
             .then(data => {
-                console.log('------------------------------------------');
-                console.log('success with createUserWithEmail And Password');
-                console.log('------------------------------------------');
+                console.log('data.user.uid', data.user.uid);
+                return database
+                    .ref(`users/${data.user.uid}/personalData`)
+                    .update(userData)
+                    .then(() => {
+                        dispatch(setUserActionGen(userData));
+                        console.log(`users/${data.user.uid}/personalData was updated`);
+                    })
+                    .catch((e) => console.log('error - ', e))
+                // startSetUserActionGen({address:'made up stuff'})
             })
             .catch(e => {
-                console.log('------------------------------------------');
-                console.log('error from createUserAndRetrieveData... ',e);
-                console.log('------------------------------------------');
+                console.log('error in startEmailSignup... ',e);
             })
     }
 }
 
-// or
 
-// export const startEmailSignup =
-// ({whatever}) => (dispatch, getState) => {
-//
-// }
 
 export const startEmailLogin = (email, password) => {
     return (dispatch) => {
         return firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
-            .then(xxx => {
+            .then(x => {
                 console.log('------------------------------------------');
-                console.log('signed in with email and password ', xxx);
+                console.log('signed in with email and password ', x);
                 console.log('------------------------------------------');
             })
             .catch(e => {
@@ -70,11 +77,13 @@ export const startGoogleLogin = () => {
         return firebase
             .auth()
             .signInWithPopup(GoogleAuthProvider)
+            .then(result => {
+                const user = result.user;
+            })
     }
 }
 
-export const startLogout =
-() => {
+export const startLogout = () => {
     return (dispatch, getState) => {
         return firebase
             .auth()

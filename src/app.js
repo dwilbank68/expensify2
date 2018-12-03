@@ -12,6 +12,8 @@ import 'react-dates/lib/css/_datepicker.css';
 
 import database, {firebase} from './firebase/firebase.js';
 
+import LoadingPage from './components/LoadingPage.jsx';
+
 const store = configureStore();
 
 let hasRendered = false;
@@ -39,7 +41,7 @@ const renderApp = () => {
     }
 }
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+ReactDOM.render(<LoadingPage/>, document.getElementById('app'));
 
 firebase
     .auth()
@@ -51,13 +53,14 @@ firebase
                 .ref(`users/${user.uid}/personalData`)
                 .once('value')
                 .then(userSnapshot => {
+                    // dispatch extra userData, if user has provided it
                     const userData = userSnapshot.val() ? userSnapshot.val() : {};
                     console.log('data from editUserActionGen',userData);
                     store.dispatch(setUserActionGen(userData))
                     store.dispatch(startSetExpensesActionGen())
                         .then(() => {
                             renderApp();
-                            if (['/', '/signup'].includes(history.location.pathname)) {
+                            if (['/', '/signup', `/user_edit/${user.uid }`].includes(history.location.pathname)) {
                                 history.push('/dashboard');
                             }
                         })

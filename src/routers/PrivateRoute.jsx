@@ -7,7 +7,6 @@ const PrivateRoute = ({hasAddress, isAuthenticated, component: Component, uid, .
 
     const PrivateComponent = props => (
         <div>
-            <Header/>
             <Component {...props}/>
         </div>
     )

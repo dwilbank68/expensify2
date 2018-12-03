@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import {startLogout} from "../actions/authActionGenerators";
 
@@ -10,12 +10,19 @@ class Header extends Component {
     render() {
         return (
             <header className="header">
-                <h1>Expensify</h1>
-                <NavLink to="/dashboard" activeClassName="is-active" >Dashboard</NavLink>
-                <NavLink to="/create" activeClassName="is-active">Create Expense</NavLink>
-                <button onClick={this.props.startLogout}>
-                    Logout
-                </button>
+                <div className="content-container">
+                    <div className="header__content">
+                        <Link   className="header__title"
+                                to="/dashboard">
+                            <h1>Expensify</h1>
+                        </Link>
+                        {/*<NavLink to="/create" activeClassName="is-active">Create Expense</NavLink>*/}
+                        <button className='button button--link'
+                                onClick={this.props.startLogout}>
+                            Logout
+                        </button>
+                    </div>
+                </div>
             </header>
         );
     }

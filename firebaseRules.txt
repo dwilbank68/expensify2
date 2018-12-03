@@ -25,12 +25,12 @@
 {
     "rules": {
         ".read": false,
-            ".write": false,
-            "users": {
-                "$user_id": {
-                    ".read": "$user_id === auth.uid",
-                        ".write": "$user_id === auth.uid",
-                        "expenses": {
+        ".write": false,
+        "users": {
+            "$user_id": {
+                ".read": "$user_id === auth.uid",
+                    ".write": "$user_id === auth.uid",
+                    "expenses": {
                         "$expense_id": {
                             ".validate": "newData.hasChildren(['description', 'note', 'createdAt', 'amount'])",
                                 "description": {".validate":"newData.isString() && newData.val().length > 0"},
@@ -39,6 +39,11 @@
                             "amount": {".validate":"newData.isNumber()"},
                             "$other": {".validate": false}
                         }
+                    },
+                    "personalData": {
+                        "address": {".validate":"newData.isString() && newData.val().length > 6"},
+                        "screenName": {".validate":"newData.isString() && newData.val().length > 1"},
+                        "fullName": {".validate":"newData.isString()"}
                     },
                     "$other": {".validate": false}
             }

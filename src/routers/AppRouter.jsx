@@ -12,7 +12,7 @@ import ExpenseDashboardPage from '../components/ExpenseDashboardPage.jsx';
 import LoginPage from '../components/LoginPage.jsx';
 import SignupPage from '../components/SignupPage.jsx';
 import NotFoundPage from '../components/NotFoundPage.jsx';
-import UserEditPage from '../components/UserEditPage.jsx';
+import EditUserPage from '../components/EditUserPage.jsx';
 
 export const history = createHistory();
 
@@ -25,7 +25,7 @@ const AppRouter = () => (
                 <PrivateRouteAddressRequired path="/create" component={AddExpensePage}/>
                 <PrivateRouteAddressRequired path="/edit/:id" component={EditExpensePage}/>
                 <PublicRoute path="/signup" component={SignupPage}/>
-                <PrivateRoute path="/user_edit/:id" component={UserEditPage}/>
+                <PrivateRoute path="/user_edit/:id" component={EditUserPage}/>
                 <Route component={NotFoundPage}/>
             </Switch>
         </div>

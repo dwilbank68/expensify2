@@ -1,0 +1,114 @@
+@-webkit-keyframes red {
+  from {
+    box-shadow: 0 0 10px #fff,
+    0 0 20px #f00,
+    0 0 30px #f00,
+    0 0 40px #FF1111,
+    0 0 70px #FF1111,
+    0 0 80px #FF1111,
+    0 0 100px #FF1111,
+    0 0 150px #FF1111;
+  }
+  to {
+    box-shadow: 0 0 5px #f00,
+    0 0 10px #f00,
+    0 0 15px #f00,
+    0 0 20px #FF1111,
+    0 0 35px #FF1111,
+    0 0 40px #FF1111,
+    0 0 50px #FF1111,
+    0 0 75px #FF1111;
+  }
+}
+
+@-moz-keyframes red {
+  from {
+    box-shadow: 0 0 10px #f00,
+    0 0 20px #f00,
+    0 0 30px #f00,
+    0 0 40px #FF1111,
+    0 0 70px #FF1111,
+    0 0 80px #FF1111,
+    0 0 100px #FF1111,
+    0 0 150px #FF1111;
+  }
+  to {
+    box-shadow: 0 0 5px #f00,
+    0 0 10px #f00,
+    0 0 15px #f00,
+    0 0 20px #FF1111,
+    0 0 35px #FF1111,
+    0 0 40px #FF1111,
+    0 0 50px #FF1111,
+    0 0 75px #FF1111;
+  }
+}
+
+
+
+@keyframes red {
+  0% { background-color: #C00; box-shadow: 0 0 3px #C00; }
+  50% { background-color: #F00; box-shadow: 0 0 20px #F00; }
+  100% { background-color: #C00; box-shadow: 0 0 3px #C00; }
+}
+
+@keyframes red-text {
+  0% { color: #F99; text-shadow: 0 0 3px #C00; }
+  50% { color: #F00; text-shadow: 0 0 20px #F00; }
+  100% { color: #F99; text-shadow: 0 0 3px #C00; }
+}
+
+@keyframes redPulse {
+  0% {
+    -webkit-box-shadow: 0 0 5px 5px rgba(255,0,0, 0.4);
+    -moz-box-shadow: 0 0 5px 5px rgba(255,0,0, 0.4);
+    box-shadow: 0 0 5px 0 rgba(255,0,0, 0.4);
+    background: #C00;
+  }
+  100% {
+    -webkit-box-shadow: 0 0 10px 70px rgba(255,0,0, 0);
+    -moz-box-shadow: 0 0 10px 70px rgba(255,0,0, 0);
+    box-shadow: 0 0 10px 70px rgba(255,0,0, 0);
+    background: red;
+  }
+}
+
+@keyframes green {
+  from {
+    background-color: #0F0;
+    box-shadow: 0 0 10px #bfb, 0 0 20px #9fb, 0 0 30px #7fb, 0 0 40px #4F4, 0 0 70px #3F3, 0 0 80px #2F2, 0 0 100px #1F1, 0 0 150px #0F0;
+  }
+  to {
+    background-color: #8F8;
+    box-shadow: 0 0 5px #bfb, 0 0 10px #9fb, 0 0 15px #7fb, 0 0 20px #4F4, 0 0 35px #3F3, 0 0 40px #2F2, 0 0 50px #1F1, 0 0 75px #0F0;
+  }
+}
+
+@keyframes green-text {
+  from {
+    color: #9F9;
+    text-shadow: 0 0 10px #bfb, 0 0 20px #9fb, 0 0 30px #7fb, 0 0 40px #4F4, 0 0 70px #3F3, 0 0 80px #2F2, 0 0 100px #1F1, 0 0 150px #0F0;
+  }
+  to {
+    color: #0F0;
+    text-shadow: 0 0 5px #bfb, 0 0 10px #9fb, 0 0 15px #7fb, 0 0 20px #4F4, 0 0 35px #3F3, 0 0 40px #2F2, 0 0 50px #1F1, 0 0 75px #0F0;
+  }
+}
+
+@keyframes green-pulse {
+  0% {
+    -moz-box-shadow: 0 0 5px 0 rgba(4,255,4, 0.4);
+    box-shadow: 0 0 5px 0 rgba(4,255,4, 0.4);
+    background: #8F8;
+  }
+  100% {
+    -moz-box-shadow: 0 0 15px 70px rgba(4,255,4, 0);
+    box-shadow: 0 0 15px 70px rgba(4,255,4, 0);
+    background: #AFA;
+  }
+}
+
+.react-tabs__tab:focus {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}

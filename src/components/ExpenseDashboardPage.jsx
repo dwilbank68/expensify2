@@ -41,7 +41,7 @@ class ExpenseDashboardPage extends Component {
 
     render() {
         return (
-            <header className="header">
+            <header>
                 <ExpenseSummary/>
                 <ExpenseListFilters/>
                 <ExpenseList/>

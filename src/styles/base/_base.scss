@@ -1,10 +1,21 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 html {
   font-size: 62.5%;
+  //  which converts base font size of browser (16) and makes it 10
+  min-width: 830px;
 }
 
 body {
+  color: $dark-gray;
   font-family: Helvetica, Arial, sans-serif;
-  font-size: $m-size;
+  font-size: $base-font-size;
+  line-height: 1.6;
+  // which restores the font sizes in body to 16
 }
 
 button {
@@ -17,4 +28,40 @@ button:disabled {
 
 .is-active {
   font-weight: bold;
+}
+
+h1,h2,h3,h4,h5,h6, textarea,
+.message-chat-text-sender {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+}
+p,a,li,blockquote, input, .headline,
+.message-chat-text-body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+}
+
+h1 {
+  font-weight: 300;
+  margin-bottom: $space;
+}
+
+h2 {
+  font-size: $font-size-large;
+  margin-bottom: $space;;
+}
+
+p {
+  margin-bottom: $space;
+}
+
+a {
+  color: black;
+}
+
+input[type=text], input[type=email], input[type=password], .Select {
+  border: 1px solid $input-border;
+  font-size: $base-font-size;
+  margin-bottom: $space;
+  padding: $input-spacing;
 }

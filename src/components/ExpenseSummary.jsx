@@ -1,7 +1,7 @@
 import React from 'react';
 import numeral from 'numeral';
-// import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 import expensesTotal from '../selectors/expensesTotal.js';
 import selectExpenses from '../selectors/expenses.js';
@@ -13,12 +13,24 @@ ExpenseSummary = ({expensesCount, expensesTotal}) => {
 
     const renderMessage = () => {
         const expenseWord = expensesCount == 1 ? 'expense' : 'expenses';
-        return `Viewing ${expensesCount} ${expenseWord} totalling ${expensesTotal}`
+        return (
+            <h1 className="page-header__title">
+                Viewing <span>{expensesCount}</span> {expenseWord} totalling <span>{expensesTotal}</span>
+            </h1>
+        )
     }
 
     return (
-        <div className="expense-summary">
-            <h1>{renderMessage()}</h1>
+        <div className="page-header">
+            <div className="content-container">
+                {renderMessage()}
+                <div className="page-header__actions">
+                    <Link   to="/create"
+                            className="button">
+                        Add Expense
+                    </Link>
+                </div>
+            </div>
         </div>
     );
 };

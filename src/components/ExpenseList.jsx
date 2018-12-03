@@ -9,15 +9,24 @@ export const
 ExpenseList = ({expenses, filters}) => {
 
     return (
-        <div className="expense-list">
-            {expenses.length === 0 ? (
-                <p>no expenses</p>
-            ) : (
-                expenses.map(exp => (
-                    <ExpenseListItem   {...exp}
-                                       key={exp.id}/>
-                ))
-            )}
+        <div className="content-container">
+            <div className="list-header">
+                <div className='show-for-mobile'>Expenses</div>
+                <div className='show-for-desktop'>Expense</div>
+                <div className='show-for-desktop'>Amount</div>
+            </div>
+            <div className="list-body">
+                {expenses.length === 0 ? (
+                    <div className='list-item list-item--message'>
+                        <span>no expenses</span>
+                    </div>
+                ) : (
+                    expenses.map(exp => (
+                        <ExpenseListItem   {...exp}
+                                           key={exp.id}/>
+                    ))
+                )}
+            </div>
         </div>
     );
 };
